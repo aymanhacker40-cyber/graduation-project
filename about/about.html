@@ -8,217 +8,30 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: #333;
-      }
-
-      .header {
-        background: linear-gradient(135deg, #0a4d5c 0%, #1a7a8a 100%);
-        color: white;
-        padding: 80px 20px;
-        text-align: center;
-      }
-
-      .header h1 {
-        font-size: 3em;
-        margin-bottom: 10px;
-        font-weight: 700;
-      }
-
-      .header p {
-        font-size: 1.2em;
-        opacity: 0.9;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 60px 20px;
-      }
-
-      .about-section {
-        margin-bottom: 50px;
-      }
-
-      .about-section h2 {
-        color: #0a4d5c;
-        font-size: 2.2em;
-        margin-bottom: 20px;
-        border-bottom: 3px solid #1a7a8a;
-        padding-bottom: 10px;
-      }
-
-      .about-section p {
-        font-size: 1.1em;
-        margin-bottom: 15px;
-        text-align: justify;
-        color: #555;
-      }
-      .features {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* صفين كل صف فيه كارتين */
-        gap: 30px;
-        margin: 50px 0;
-        justify-items: center; /* يخليهم في النص */
-      }
-
-      .feature-card {
-        background: #f8f9fa;
-        padding: 30px;
-        border-radius: 10px;
-        text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s;
-        border: 2px solid #e0e0e0;
-      }
-
-      .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      }
-
-      .feature-card i {
-        font-size: 3em;
-        color: #1a7a8a;
-        margin-bottom: 20px;
-      }
-
-      .feature-card h3 {
-        color: #0a4d5c;
-        margin-bottom: 15px;
-        font-size: 1.5em;
-      }
-
-      .feature-card p {
-        font-size: 1em;
-        color: #666;
-      }
-
-      .social-section {
-        background: linear-gradient(135deg, #0a4d5c 0%, #1a7a8a 100%);
-        padding: 60px 20px;
-        text-align: center;
-        color: white;
-      }
-
-      .social-section h2 {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-      }
-
-      .social-section p {
-        font-size: 1.2em;
-        margin-bottom: 40px;
-        opacity: 0.9;
-      }
-
-      .social-links {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .social-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: white;
-        color: #0a4d5c;
-        font-size: 1.8em;
-        transition: all 0.3s;
-        text-decoration: none;
-      }
-
-      .social-link:hover {
-        transform: scale(1.2);
-        box-shadow: 0 5px 20px rgba(255, 255, 255, 0.5);
-      }
-
-      .social-link.facebook:hover {
-        background: #1877f2;
-        color: white;
-      }
-
-      .social-link.instagram:hover {
-        background: linear-gradient(
-          45deg,
-          #f09433 0%,
-          #e6683c 25%,
-          #dc2743 50%,
-          #cc2366 75%,
-          #bc1888 100%
-        );
-        color: white;
-      }
-
-      .social-link.twitter:hover {
-        background: #1da1f2;
-        color: white;
-      }
-
-      .social-link.linkedin:hover {
-        background: #0077b5;
-        color: white;
-      }
-
-      .social-link.tiktok:hover {
-        background: #000000;
-        color: white;
-      }
-
-      .social-link.whatsapp:hover {
-        background: #25d366;
-        color: white;
-      }
-
-      .footer {
-        background: #0a4d5c;
-        color: white;
-        text-align: center;
-        padding: 30px 20px;
-        margin-top: 50px;
-      }
-
-      .footer p {
-        font-size: 1em;
-        opacity: 0.8;
-      }
-
-      @media (max-width: 768px) {
-        .header h1 {
-          font-size: 2em;
-        }
-
-        .about-section h2 {
-          font-size: 1.8em;
-        }
-
-        .social-section h2 {
-          font-size: 2em;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <link rel="stylesheet" href="about.css" />
   </head>
   <body>
-    <div class="header">
-      <h1>About Travel</h1>
-      <p>Your Journey Begins Here</p>
-    </div>
+    <!-- ===== HEADER ===== -->
+    <header class="main-header">
+      <div class="navbar">
+        <div class="logo">Travel</div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">Hotels</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
 
+      <div class="header-content">
+        <h1>About Travel</h1>
+        <p>Your Journey Begins Here</p>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
     <div class="container">
       <div class="about-section">
         <h2>Who We Are</h2>
@@ -280,6 +93,26 @@
           </p>
         </div>
       </div>
+      <div class="stats-section">
+        <div class="stats-container">
+          <div class="stat-card">
+            <h3 id="users">0</h3>
+            <p>Happy Users</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="destinations">0</h3>
+            <p>Global Destinations</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="bookings">0</h3>
+            <p>Bookings Completed</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="experts">0</h3>
+            <p>Expert Team Members</p>
+          </div>
+        </div>
+      </div>
 
       <div class="about-section">
         <h2>Why Choose Us</h2>
@@ -299,6 +132,7 @@
       </div>
     </div>
 
+    <!-- ===== SOCIAL SECTION ===== -->
     <div class="social-section">
       <h2>Connect With Us</h2>
       <p>
@@ -327,9 +161,38 @@
       </div>
     </div>
 
-    <div class="footer">
-      <p>&copy; 2025 Travel. All rights reserved.</p>
-      <p>Making the world accessible, one journey at a time.</p>
-    </div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Travel</h3>
+          <p>
+            Your trusted partner for unforgettable journeys around the world.
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">Hotels</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: support@travel.com</p>
+          <p>Phone: +123 456 7890</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Travel. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="about.js" defer></script>
+
   </body>
 </html>
