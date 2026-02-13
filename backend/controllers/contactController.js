@@ -19,7 +19,7 @@ exports.sendMessage = async (req, res) => {
 
     // 2) إرسال الإيميل باستخدام Resend
     await resend.emails.send({
-      from: process.env.EMAIL_USER, // أو إيميل الدومين بتاعك لو موثّقه
+      from: "Travel App <onboarding@resend.dev>",
       to: [process.env.EMAIL_USER], // الإيميل اللي هيستقبل الرسائل
       replyTo: email, // عشان ترد على صاحب الرسالة مباشرة
       subject: `📩 New Contact Message - ${subject || "No Subject"}`,
