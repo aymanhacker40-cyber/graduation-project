@@ -1,12 +1,14 @@
 const ContactMessage = require("../models/ContactMessage");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 exports.sendMessage = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, subject, message } = req.body;
 
-    // 1️⃣ حفظ في الداتا بيز
-    const savedMessage = await ContactMessage.create({
+    // 1) حفظ الرسالة في الداتا بيز
+    await ContactMessage.create({
       firstName,
       lastName,
       email,
@@ -15,33 +17,27 @@ exports.sendMessage = async (req, res) => {
       message,
     });
 
-    // 2️⃣ إرسال Email
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"Travel Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER,
-      subject: `📩 New Contact Message - ${subject}`,
-      text: `
-Name: ${firstName} ${lastName}
-Email: ${email}
-Phone: ${phone}
-
-Message:
-${message}
+    // 2) إرسال الإيميل باستخدام Resend
+    await resend.emails.send({
+      from: "Travel Contact <onboarding@resend.dev>", // أو إيميل الدومين بتاعك لو موثّقه
+      to: [process.env.EMAIL_USER], // الإيميل اللي هيستقبل الرسائل
+      replyTo: email, // عشان ترد على صاحب الرسالة مباشرة
+      subject: `📩 New Contact Message - ${subject || "No Subject"}`,
+      html: `
+        <h3>New Contact Message</h3>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
       `,
     });
 
-    res.status(201).json({ message: "Message sent successfully" });
-
+    return res.status(201).json({ message: "Message sent successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    console.error("Send contact message error:", error);
+    return res
+      .status(500)
+      .json({ message: "Server error while sending email" });
   }
 };
