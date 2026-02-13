@@ -101,7 +101,7 @@ exports.forgotPassword = async (req, res) => {
 
     // Send email using Resend
     await resend.emails.send({
-      from: process.env.EMAIL_USER, // أو الإيميل الموثّق بتاعك
+      from: "Travel App <onboarding@resend.dev>",
       to: [user.email],
       subject: "Reset Your Password",
       html: `
