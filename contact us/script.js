@@ -1,65 +1,91 @@
+// =======================
+// FAQ Accordion
+// =======================
+document.querySelectorAll(".faq-item").forEach((item) => {
+  item.addEventListener("click", function () {
+    const isActive = this.classList.contains("active");
 
-        // FAQ Accordion
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const isActive = this.classList.contains('active');
-                
-                // Close all FAQ items
-                document.querySelectorAll('.faq-item').forEach(faq => {
-                    faq.classList.remove('active');
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    this.classList.add('active');
-                }
-            });
-        });
+    document.querySelectorAll(".faq-item").forEach((faq) => {
+      faq.classList.remove("active");
+    });
 
-        // Contact Card Click Effects
-        document.querySelectorAll('.contact-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const cardTitle = this.querySelector('h3').textContent;
-                console.log(`Contact method clicked: ${cardTitle}`);
-                
-                // Add a visual feedback
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
-            });
-        });
+    if (!isActive) {
+      this.classList.add("active");
+    }
+  });
+});
 
-        // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toISOString()
-            };
-            
-            console.log('Form submitted:', formData);
-            
-            // Show success modal
-            document.getElementById('successModal').classList.add('show');
-            
-            // Reset form
-            this.reset();
-        });
+// =======================
+// Contact Card Click Effects
+// =======================
+document.querySelectorAll(".contact-card").forEach((card) => {
+  card.addEventListener("click", function () {
+    const cardTitle = this.querySelector("h3").textContent;
+    console.log(`Contact method clicked: ${cardTitle}`);
 
-        function closeModal() {
-            document.getElementById('successModal').classList.remove('show');
-        }
+    this.style.transform = "scale(0.95)";
+    setTimeout(() => {
+      this.style.transform = "";
+    }, 200);
+  });
+});
 
-        // Close modal when clicking outside
-        document.getElementById('successModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
+// =======================
+// Form Submission (Backend Integrated)
+// =======================
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = {
+      firstName: document.getElementById("firstName").value.trim(),
+      lastName: document.getElementById("lastName").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      subject: document.getElementById("subject").value,
+      message: document.getElementById("message").value.trim(),
+    };
+
+    try {
+      const res = await fetch(
+        "https://graduation-project-isx1.onrender.com/api/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        },
+      );
+
+      if (!res.ok) {
+        console.error("Failed to send message");
+        return;
+      }
+
+      console.log("Message sent successfully");
+
+      // Show success modal
+      document.getElementById("successModal").classList.add("show");
+
+      // Reset form
+      this.reset();
+    } catch (error) {
+      console.error("Server error:", error);
+    }
+  });
+
+// =======================
+// Modal Controls
+// =======================
+function closeModal() {
+  document.getElementById("successModal").classList.remove("show");
+}
+
+// Close modal when clicking outside
+document.getElementById("successModal").addEventListener("click", function (e) {
+  if (e.target === this) {
+    closeModal();
+  }
+});

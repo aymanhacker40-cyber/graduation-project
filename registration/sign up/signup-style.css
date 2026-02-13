@@ -292,4 +292,19 @@ body {
   .form-row {
     grid-template-columns: 1fr;
   }
+  .form-message {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  text-align: center;
+  display: none;
+}
+
+.form-message.error {
+  color: #ffcccc;
+}
+
+.form-message.success {
+  color: #90ee90;
+}
+
 }
