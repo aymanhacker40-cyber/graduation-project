@@ -3,5 +3,6 @@ const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
 if (!token) {
   window.location.href =
-    window.location.origin + "/frontend/registration/login/login.html";
+    window.location.origin +
+    "/frontend/registration/login/travel_login_html.html";
 }
